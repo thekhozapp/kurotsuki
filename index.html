@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=Shippori+Mincho:wght@600;800&family=JetBrains+Mono:wght@500&display=swap">
 <style>
 /* Layout: one night sky. A black moon slides across a bright disc as you scroll the hero (an eclipse),
-   then the page reads downward: the name, the product, how we work, the phases, contact. */
+   then the page reads downward: the name, the product, how we work, the cycle, contact. */
 :root{
   --night:#06060a; --night-2:#0d0d16; --line:rgb(214 220 255 / .12);
   --moonlight:#eef0ff; --silver:#b9c3e8; --mute:#8a90ad;
@@ -135,14 +135,34 @@ h2 em{font-style:italic;color:var(--silver)}
 .p p{margin:0;color:var(--silver);font-size:.98rem}
 .moonmini{width:44px;height:44px;border-radius:50%;background:#e9ecff;position:relative;overflow:hidden;margin-bottom:6px;box-shadow:0 0 30px rgb(169 184 255 / .3)}
 .moonmini::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--night);transform:translateX(var(--off))}
-/* phases */
-.phases{padding-block:clamp(60px,10vw,140px)}
-.prow{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;margin-top:50px;align-items:end}
-@media (max-width:760px){.prow{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.ph{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
-.ph canvas{width:100%;max-width:88px;aspect-ratio:1}
-.ph b{font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.1}
-.ph small{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+/* the cycle: one moon that waxes and wanes as you scroll */
+.cycle{position:relative;height:420vh}
+.cyc-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(24px,5vw,80px)}
+.cyc-moon{position:relative;display:grid;place-items:center}
+.cyc-moon canvas{width:min(46vw,520px);aspect-ratio:1;max-width:100%}
+.cyc-moon .halo2{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,rgb(169 184 255 / calc(.04 + var(--lum,0) * .22)),transparent 68%);filter:blur(30px);pointer-events:none}
+.cyc-head h2{margin-top:14px}
+.steps{list-style:none;margin:34px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:baseline;gap:4px 10px;padding:9px 0;border-top:1px solid var(--line);color:rgb(238 240 255 / .28);transition:color .45s}
+.steps li::before{content:attr(data-n);font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:inherit}
+.steps b{font-family:var(--display);font-weight:400;font-size:clamp(1.3rem,2.2vw,1.7rem);line-height:1.1}
+.steps b small{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-left:10px;color:var(--mute)}
+.steps p{grid-column:2;margin:0;font-size:.95rem;color:var(--silver);max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .5s}
+.steps li.on{color:var(--moonlight)}
+.steps li.on p{max-height:4em;opacity:1}
+@media (max-width:820px){
+  .cyc-stage{grid-template-columns:minmax(0,1fr);align-content:center;gap:10px}
+  .cyc-moon canvas{width:min(62vw,300px)}
+  .cyc-head h2{font-size:clamp(2rem,9vw,2.6rem)}
+  .steps{margin-top:14px}
+  .steps li{padding:6px 0}
+  .steps li:not(.on){display:none}
+  .dots{display:flex!important}
+}
+.dots{display:none;gap:6px;margin-top:14px}
+.dots i{width:22px;height:3px;border-radius:2px;background:var(--line);transition:background .4s}
+.dots i.on{background:var(--moonlight)}
+@media (prefers-reduced-motion:reduce){.cycle{height:auto}.cyc-stage{position:relative;height:auto;padding-block:80px}.steps li{color:var(--moonlight)}.steps li p{max-height:none;opacity:1}.steps li:not(.on){display:grid}.dots{display:none!important}}
 /* contact */
 .contact{padding-block:clamp(110px,16vw,220px) 60px;text-align:center;overflow:hidden}
 .contact h2{font-size:clamp(3rem,10vw,8rem);line-height:.92}
@@ -256,19 +276,25 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-bloc
     </div>
   </section>
 
-  <section class="phases gut">
-    <div class="wrap">
-      <div class="label rv">Every cycle</div>
-      <h2 class="rv">From a dark idea <em>to a full moon.</em></h2>
-      <div class="prow" id="prow">
-        <div class="ph rv"><canvas data-k="0"></canvas><b>Notice</b><small>New moon</small></div>
-        <div class="ph rv"><canvas data-k="1"></canvas><b>Listen</b><small>Crescent</small></div>
-        <div class="ph rv"><canvas data-k="2"></canvas><b>Sketch</b><small>First quarter</small></div>
-        <div class="ph rv"><canvas data-k="3"></canvas><b>Build</b><small>Gibbous</small></div>
-        <div class="ph rv"><canvas data-k="4"></canvas><b>Ship</b><small>Full moon</small></div>
-        <div class="ph rv"><canvas data-k="5"></canvas><b>Watch</b><small>Waning</small></div>
-        <div class="ph rv"><canvas data-k="6"></canvas><b>Fix</b><small>Last quarter</small></div>
-        <div class="ph rv"><canvas data-k="7"></canvas><b>Again</b><small>Old moon</small></div>
+  <section class="cycle gut" id="cycle">
+    <div class="wrap cyc-stage">
+      <div class="cyc-moon" aria-hidden="true"><div class="halo2"></div><canvas id="bigmoon"></canvas></div>
+      <div>
+        <div class="cyc-head">
+          <div class="label">Every cycle</div>
+          <h2>From a dark idea <em>to a full moon.</em></h2>
+        </div>
+        <ol class="steps" id="steps">
+          <li data-n="01" class="on"><b>Notice<small>New moon</small></b><p>It starts in the dark: something in a neighbourhood that's harder than it should be.</p></li>
+          <li data-n="02"><b>Listen<small>Crescent</small></b><p>We sit with the salon owner, the tutor, the society secretary, and hear how they really work.</p></li>
+          <li data-n="03"><b>Sketch<small>First quarter</small></b><p>Half an idea on paper, shown to the people it's for before a line of code.</p></li>
+          <li data-n="04"><b>Build<small>Gibbous</small></b><p>Small, tested, in their language, for the phone already in their pocket.</p></li>
+          <li data-n="05"><b>Ship<small>Full moon</small></b><p>It reaches everyone at once, and we watch it land.</p></li>
+          <li data-n="06"><b>Watch<small>Waning</small></b><p>Real use tells the truth. We read every message sent to support.</p></li>
+          <li data-n="07"><b>Fix<small>Last quarter</small></b><p>What's rough gets smoothed. What nobody uses gets taken away.</p></li>
+          <li data-n="08"><b>Again<small>Old moon</small></b><p>Then back to the dark, to notice the next thing.</p></li>
+        </ol>
+        <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
     </div>
   </section>
@@ -380,21 +406,56 @@ footer{position:relative;z-index:2;border-top:1px solid var(--line);padding-bloc
     tilt.addEventListener('pointerleave', () => { ['--ry', '--rx', '--gx'].forEach((v) => phone.style.removeProperty(v)); });
   }
 
-  /* moon phases */
-  document.querySelectorAll('.ph canvas').forEach((c) => {
-    const k = +c.dataset.k, d = Math.min(devicePixelRatio || 1, 2), s = 88; c.width = s * d; c.height = s * d;
-    const g = c.getContext('2d'); g.scale(d, d); const R = 34, C = s / 2;
-    const f = k / 8, cs = Math.cos(f * Math.PI * 2), waxing = f < .5;
-    const dark = '#14151f', light = '#e9ecff';
-    g.fillStyle = dark; g.beginPath(); g.arc(C, C, R, 0, 6.29); g.fill();
-    if (k !== 0) {
-      g.save(); g.shadowColor = 'rgba(169,184,255,.55)'; g.shadowBlur = 16; g.fillStyle = light;
-      g.beginPath(); g.arc(C, C, R, -Math.PI / 2, Math.PI / 2, !waxing); g.closePath(); g.fill(); g.restore();
-      g.fillStyle = cs > 0 ? dark : light;
-      g.beginPath(); g.ellipse(C, C, Math.abs(cs) * R + .5, R + .5, 0, 0, 6.29); g.fill();
+  /* the cycle: a textured moon whose phase follows the scroll */
+  const big = document.getElementById('bigmoon'), bg = big.getContext('2d');
+  const cycle = document.getElementById('cycle'), steps = [...document.querySelectorAll('#steps li')], dots = [...document.querySelectorAll('#dots i')];
+  const S = 520, D = Math.min(devicePixelRatio || 1, 2), R = 230, C = S / 2;
+  big.width = S * D; big.height = S * D; bg.setTransform(D, 0, 0, D, 0, 0);
+  const tex = document.createElement('canvas'); tex.width = tex.height = S * D; const tg = tex.getContext('2d'); tg.setTransform(D, 0, 0, D, 0, 0);
+  (() => {
+    let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const grd = tg.createRadialGradient(C - 60, C - 70, 20, C, C, R);
+    grd.addColorStop(0, '#f4f5ff'); grd.addColorStop(.7, '#d9ddf2'); grd.addColorStop(1, '#a9b0cf');
+    tg.fillStyle = grd; tg.beginPath(); tg.arc(C, C, R, 0, 6.29); tg.fill();
+    tg.save(); tg.beginPath(); tg.arc(C, C, R, 0, 6.29); tg.clip();
+    for (const [x, y, r] of [[-60, -40, 70], [50, 30, 55], [-20, 80, 45], [80, -90, 38], [-110, 40, 34]]) {
+      tg.fillStyle = 'rgba(120,128,170,.18)'; tg.beginPath(); tg.ellipse(C + x, C + y, r, r * .86, .4, 0, 6.29); tg.fill();
     }
-    g.strokeStyle = 'rgba(214,220,255,.18)'; g.lineWidth = 1; g.beginPath(); g.arc(C, C, R, 0, 6.29); g.stroke();
-  });
+    for (let i = 0; i < 140; i++) {
+      const a = rnd() * 6.28, d = Math.sqrt(rnd()) * R * .96, r = 2 + Math.pow(rnd(), 3) * 18, x = C + Math.cos(a) * d, y = C + Math.sin(a) * d;
+      tg.fillStyle = 'rgba(90,98,140,.22)'; tg.beginPath(); tg.arc(x, y, r, 0, 6.29); tg.fill();
+      tg.strokeStyle = 'rgba(255,255,255,.35)'; tg.lineWidth = .8; tg.beginPath(); tg.arc(x - r * .15, y - r * .15, r, 3.4, 5.2); tg.stroke();
+    }
+    const limb = tg.createRadialGradient(C, C, R * .7, C, C, R); limb.addColorStop(0, 'rgba(0,0,0,0)'); limb.addColorStop(1, 'rgba(20,24,50,.45)');
+    tg.fillStyle = limb; tg.fillRect(0, 0, S, S); tg.restore();
+  })();
+  const mask = document.createElement('canvas'); mask.width = mask.height = S * D; const mg = mask.getContext('2d');
+  const drawMoon = (f) => {
+    const cs = Math.cos(f * Math.PI * 2), waxing = f < .5, lum = (1 - cs) / 2;
+    cycle.style.setProperty('--lum', lum.toFixed(3));
+    bg.clearRect(0, 0, S, S);
+    bg.save(); bg.globalAlpha = .13; bg.drawImage(tex, 0, 0, S, S); bg.restore();
+    mg.setTransform(1, 0, 0, 1, 0, 0); mg.clearRect(0, 0, mask.width, mask.height); mg.setTransform(D, 0, 0, D, 0, 0);
+    if (lum > .002) {
+      mg.save(); if (!waxing) { mg.translate(S, 0); mg.scale(-1, 1); }
+      mg.filter = 'blur(3px)'; mg.fillStyle = '#fff'; mg.beginPath();
+      mg.arc(C, C, R, -Math.PI / 2, Math.PI / 2, false);
+      mg.ellipse(C, C, Math.max(.01, Math.abs(cs) * R), R, 0, Math.PI / 2, -Math.PI / 2, cs > 0);
+      mg.fill(); mg.restore();
+      mg.globalCompositeOperation = 'source-in'; mg.setTransform(1, 0, 0, 1, 0, 0); mg.drawImage(tex, 0, 0); mg.globalCompositeOperation = 'source-over';
+      bg.save(); bg.shadowColor = 'rgba(169,184,255,.55)'; bg.shadowBlur = 40 * lum; bg.drawImage(mask, 0, 0, S, S); bg.restore();
+    }
+    bg.strokeStyle = 'rgba(214,220,255,.12)'; bg.lineWidth = 1; bg.beginPath(); bg.arc(C, C, R, 0, 6.29); bg.stroke();
+  };
+  let shown = -1;
+  const onCycle = () => {
+    const r = cycle.getBoundingClientRect();
+    const p = reduce ? .5 : Math.min(.9999, Math.max(0, -r.top / (r.height - innerHeight)));
+    drawMoon(p);
+    const k = reduce ? 4 : Math.min(7, Math.floor(p * 8));
+    if (k !== shown) { shown = k; steps.forEach((li, i) => li.classList.toggle('on', i === k)); dots.forEach((d, i) => d.classList.toggle('on', i === k)); }
+  };
+  addEventListener('scroll', onCycle, { passive: true }); addEventListener('resize', onCycle); onCycle();
 
   /* copy */
   document.getElementById('copy').addEventListener('click', async (e) => {
