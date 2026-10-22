@@ -25,6 +25,8 @@
   --serif:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
   --sans:'Zen Kaku Gothic New','Hiragino Sans',system-ui,sans-serif;
   --gut:max(clamp(20px,5vw,64px),env(safe-area-inset-left,0px));
+  /* the left and right edge of the 1240px content column, for full-width bars and the hero's side text */
+  --edge:max(var(--gut),calc((100% - 1240px) / 2));
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -42,7 +44,7 @@ a{color:inherit}
 /* hero: the hills stretch with the screen; Fuji is sized and placed from the moon, its peak just over the
    moon's lower edge and the wordmark on its slopes below the snow, so the three keep their places at any size */
 .hero{--top:clamp(120px,14svh,170px);--moon:clamp(250px,48svh,460px);--range:300px;position:relative;height:max(clamp(760px,100svh,980px),calc(var(--top) + var(--moon) + 380px));display:flex;flex-direction:column;align-items:center;padding-top:var(--top);isolation:isolate;overflow:hidden}
-.nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) var(--gut) 18px;z-index:30;animation:fadeDown 1.2s ease .2s both;transition:background .5s,backdrop-filter .5s}
+.nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) var(--edge) 18px;z-index:30;animation:fadeDown 1.2s ease .2s both;transition:background .5s,backdrop-filter .5s}
 .nav.solid{background:rgba(11,11,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .brand{display:flex;gap:12px;align-items:center;min-height:44px;text-decoration:none;color:var(--paper);font-size:12px;font-weight:500;letter-spacing:.32em;text-transform:uppercase}
 /* the hanko: 黒月 cut from Shippori Mincho as outlines, so the tab icon matches without a web font */
@@ -85,10 +87,10 @@ a{color:inherit}
 .mark{position:relative;z-index:2;margin:112px 0 0;display:flex;gap:.55em;font-size:30px;font-weight:500;line-height:1}
 .mark span{display:inline-block;animation:letter 1.1s cubic-bezier(.2,.7,.1,1) both}
 .sub{position:relative;z-index:2;margin:18px 0 0;font-size:11px;font-weight:500;letter-spacing:.55em;text-transform:uppercase;color:var(--mute);animation:fade 1.4s ease 2.6s both}
-.vert{position:absolute;right:clamp(20px,4vw,64px);top:50%;translate:0 -50%;writing-mode:vertical-rl;display:flex;align-items:center;gap:28px;z-index:2}
+.vert{position:absolute;right:var(--edge);top:50%;translate:0 -50%;writing-mode:vertical-rl;display:flex;align-items:center;gap:28px;z-index:2}
 .vert .k{font-size:52px;font-weight:500;letter-spacing:.2em;animation:fade 2s ease 3s both}
 .vert .r{font-size:11px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:var(--mute);animation:fade 2s ease 3.4s both}
-.vleft{position:absolute;left:clamp(20px,4vw,64px);top:50%;translate:0 -50%;margin:0;writing-mode:vertical-rl;font-size:11px;font-weight:500;letter-spacing:.45em;color:var(--mute);z-index:2;animation:fade 2s ease 3.6s both}
+.vleft{position:absolute;left:var(--edge);top:50%;translate:0 -50%;margin:0;writing-mode:vertical-rl;font-size:11px;font-weight:500;letter-spacing:.45em;color:var(--mute);z-index:2;animation:fade 2s ease 3.6s both}
 .cue{position:absolute;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:44px;font-size:10px;font-weight:500;letter-spacing:.4em;text-transform:uppercase;text-decoration:none;color:var(--mute);z-index:3;animation:fade 1s ease 3.8s both}
 .cue i{position:relative;width:1px;height:44px;overflow:hidden;background:rgba(241,237,228,.18)}
 .cue i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--paper);animation:drip 2.2s cubic-bezier(.6,0,.2,1) infinite}
@@ -194,7 +196,7 @@ a{color:inherit}
 .copy{min-height:44px;padding:0 18px;border:1px solid rgba(11,11,13,.2);border-radius:999px;background:none;color:var(--mute-p);font:500 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:color .3s,border-color .3s}
 .copy:hover{color:var(--ink);border-color:var(--ink)}
 .legal{margin:56px 0 0;font-size:12px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--mute-p)}
-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:30px var(--gut) calc(30px + env(safe-area-inset-bottom,0px));font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+footer{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:30px var(--edge) calc(30px + env(safe-area-inset-bottom,0px));font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
 footer .brand{font-size:11px}
 footer a{color:var(--mute);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 footer a:hover{color:var(--paper)}
