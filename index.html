@@ -16,7 +16,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <style>
-/* Moonrise. A full moon rises behind the mountain and a black disc slides across it: the black moon.
+/* Moonrise. A full moon rises behind the mountain and a black disc slides across it, leaving a diamond ring:
+   the black moon.
    Then the page turns to paper for the manifesto, back to night for the five phases and KHOZ, and
    closes on a brush circle around the address. */
 :root{
@@ -57,13 +58,20 @@ a{color:inherit}
 .star{position:absolute;border-radius:50%;background:var(--paper);opacity:.18;animation:twinkle var(--d) ease-in-out var(--delay) infinite alternate}
 .petals{position:absolute;inset:0;z-index:4;pointer-events:none}
 .petal{position:absolute;top:-4%;width:var(--s);height:calc(var(--s) * 1.3);background:var(--sakura);border-radius:80% 0 80% 0;opacity:0;animation:fall var(--d) linear var(--delay) infinite}
-.halo{position:absolute;top:var(--top);left:50%;width:clamp(520px,64vw,980px);aspect-ratio:1;translate:-50% -24%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--seal) 20%,transparent),color-mix(in srgb,var(--sakura) 6%,transparent) 42%,transparent 68%);z-index:-2;animation:breathe 7s ease-in-out infinite alternate}
+.halo{position:absolute;top:var(--top);left:50%;width:calc(var(--moon) * 2.4);aspect-ratio:1;translate:-50% -29%;border-radius:50%;background:radial-gradient(circle closest-side,color-mix(in srgb,var(--seal) 30%,transparent) 0%,color-mix(in srgb,var(--seal) 23%,transparent) 22%,color-mix(in srgb,var(--seal) 15%,transparent) 38%,color-mix(in srgb,var(--seal) 8%,transparent) 52%,color-mix(in srgb,var(--seal) 4.5%,transparent) 65%,color-mix(in srgb,var(--seal) 2%,transparent) 77%,color-mix(in srgb,var(--seal) .6%,transparent) 89%,transparent 100%);filter:blur(28px);z-index:-2;animation:breathe 7s ease-in-out infinite alternate}
+/* fine grain over the sky so the dark glow fades without visible steps */
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 .orbit{position:relative;width:var(--moon);aspect-ratio:1;z-index:0;animation:rise 1.8s cubic-bezier(.2,.7,.1,1) .1s both}
-.ring{position:absolute;left:-17%;top:-17%;width:134%;height:134%;overflow:visible;animation:spin 90s linear infinite}
-.ring text{font-size:8.6px;letter-spacing:3.6px;fill:var(--mute);font-family:var(--sans)}
-.ring circle{fill:none;stroke:rgba(241,237,228,.12);stroke-width:.5}
-.moon{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 64% 34%,#fffdf8 0%,#efeadf 34%,#d6cdbb 72%,#b7ac97 100%);box-shadow:0 0 50px 2px color-mix(in srgb,var(--sakura) 16%,transparent);animation:corona 5s ease-in-out 4.8s infinite alternate}
+.moon{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 64% 34%,#fffdf8 0%,#efeadf 34%,#d6cdbb 72%,#b7ac97 100%);box-shadow:0 0 28px 2px color-mix(in srgb,var(--sakura) 20%,transparent)}
+.moon{overflow:visible}
+.moon-clip{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+/* the eclipse's diamond ring: a pale corona and a bead of light where the crescent thins */
+.corona{position:absolute;inset:-9%;border-radius:50%;background:radial-gradient(circle closest-side,transparent 83%,rgba(241,237,228,.3) 85.5%,color-mix(in srgb,var(--sakura) 14%,transparent) 90%,transparent 100%);filter:blur(3px);animation:fade 2.4s ease 4.4s both}
+.bead{position:absolute;left:79%;top:9%;width:14px;height:14px;margin:-7px;border-radius:50%;background:#fff;box-shadow:0 0 10px 4px #fff,0 0 40px 14px color-mix(in srgb,var(--paper) 70%,transparent),0 0 120px 40px color-mix(in srgb,var(--sakura) 30%,transparent);animation:fade 1.2s ease 4.9s both,glint 3.4s ease-in-out 6.1s infinite alternate}
+.bead::before,.bead::after{content:"";position:absolute;left:50%;top:50%;width:220px;height:1.5px;margin:-.75px 0 0 -110px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:rotate(-28deg)}
+.bead::after{width:120px;margin-left:-60px;transform:rotate(62deg);opacity:.7}
+.shade{box-shadow:inset -3px 0 18px rgba(241,237,228,.06)}
 .crater{position:absolute;border-radius:50%;background:rgba(150,138,118,.24);box-shadow:inset 3px 3px 8px rgba(0,0,0,.08)}
 .shade{position:absolute;inset:-2%;border-radius:50%;background:radial-gradient(circle at 40% 50%,#1a191f 0%,#0b0b0d 72%);transform:translate(-8%,5%);animation:eclipse 4.6s cubic-bezier(.66,0,.16,1) .7s both}
 .range{position:absolute;left:0;right:0;bottom:0;height:var(--range);z-index:1;pointer-events:none}
@@ -198,9 +206,9 @@ footer a:hover{color:var(--paper)}
 @keyframes twinkle{to{opacity:.95;transform:scale(1.7)}}
 @keyframes fall{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:.75}88%{opacity:.55}100%{transform:translate(-160px,860px) rotate(560deg);opacity:0}}
 @keyframes breathe{from{opacity:.55;scale:.94}to{opacity:1;scale:1.04}}
+@keyframes glint{from{scale:.85;opacity:.85}to{scale:1.15;opacity:1}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes eclipse{from{transform:translate(-128%,-14%)}to{transform:translate(-8%,5%)}}
-@keyframes corona{from{box-shadow:0 0 40px 0 color-mix(in srgb,var(--sakura) 14%,transparent),0 0 120px 10px color-mix(in srgb,var(--seal) 10%,transparent)}to{box-shadow:0 0 90px 10px color-mix(in srgb,var(--sakura) 32%,transparent),0 0 280px 60px color-mix(in srgb,var(--seal) 24%,transparent)}}
 @keyframes drift{from{transform:translateX(-7%)}to{transform:translateX(7%)}}
 @keyframes drip{to{top:100%}}
 @keyframes wax{from{transform:translateX(var(--x))}to{transform:translateX(calc(var(--x) - 9%))}}
@@ -239,9 +247,11 @@ footer a:hover{color:var(--paper)}
 @media (max-width:760px){
   .navlinks .hide-s{display:none}
   .hero{--top:150px;--moon:286px;--range:240px;height:max(clamp(740px,100svh,880px),calc(var(--top) + var(--moon) + 340px))}
-  .halo{width:640px}
   .vert{top:104px;translate:none;right:20px;gap:14px}
   .vert .k{font-size:30px}
+  .bead{width:11px;height:11px;margin:-5.5px}
+  .bead::before{width:120px;margin-left:-60px}
+  .bead::after{width:70px;margin-left:-35px}
   .vert .r,.vleft{display:none}
   .mark{margin-top:108px;font-size:24px;gap:.42em}
   .sub{font-size:10px;letter-spacing:.45em}
@@ -306,17 +316,16 @@ footer a:hover{color:var(--paper)}
     <div class="petals" id="petals" aria-hidden="true"></div>
     <div class="halo" aria-hidden="true"></div>
     <div class="orbit" aria-hidden="true">
-      <svg class="ring" viewBox="0 0 300 300">
-        <circle cx="150" cy="150" r="146"/>
-        <path id="ringpath" d="M150,150 m-132,0 a132,132 0 1,1 264,0 a132,132 0 1,1 -264,0" fill="none"/>
-        <text><textPath href="#ringpath" textLength="826">KUROTSUKI PRIVATE LIMITED · 黒い月 · THE NEW MOON · MAKERS OF KHOZ · 新月 ·</textPath></text>
-      </svg>
+      <i class="corona"></i>
       <div class="moon">
-        <i class="crater" style="width:18%;height:18%;left:58%;top:22%"></i>
-        <i class="crater" style="width:9%;height:9%;left:76%;top:48%"></i>
-        <i class="crater" style="width:12%;height:12%;left:64%;top:64%"></i>
-        <i class="crater" style="width:6%;height:6%;left:46%;top:40%"></i>
-        <i class="shade"></i>
+        <div class="moon-clip">
+          <i class="crater" style="width:18%;height:18%;left:58%;top:22%"></i>
+          <i class="crater" style="width:9%;height:9%;left:76%;top:48%"></i>
+          <i class="crater" style="width:12%;height:12%;left:64%;top:64%"></i>
+          <i class="crater" style="width:6%;height:6%;left:46%;top:40%"></i>
+          <i class="shade"></i>
+        </div>
+        <i class="bead"></i>
       </div>
     </div>
     <div class="range" aria-hidden="true">
