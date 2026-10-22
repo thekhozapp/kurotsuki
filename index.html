@@ -17,7 +17,7 @@
 /* Layout: a sheet of washi. One brush circle (ensō) is drawn, then fills with ink as you scroll until it
    is a black moon. After it, a single line, five words set vertically, a seal, and an address. */
 :root{
-  --paper:#f1ede4; --paper-2:#e8e2d6; --sumi:#141312; --sumi-2:#4a4743; --ash:#8c867c; --shu:#b8382a;
+  --paper:#f1ede4; --paper-2:#e8e2d6; --sumi:#141312; --sumi-2:#4a4743; --ash:#8c867c; --shu:#b8382a; --sakura:#ebbcc1; --sakura-2:#d88f99;
   --serif:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
   --sans:'Zen Kaku Gothic New','Hiragino Sans',system-ui,sans-serif;
   color-scheme:light;
@@ -26,7 +26,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--sumi);font-family:var(--sans);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:30}
-.fibre{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .09' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .43 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
+.fibre{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.5;transform:translateZ(0);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .09' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .43 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E")}
 .gut{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 a{color:inherit}
 :focus-visible{outline:1px solid var(--shu);outline-offset:6px}
@@ -101,10 +101,28 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 @keyframes stamp{0%{transform:rotate(-3deg) scale(1.7);opacity:0}55%{transform:rotate(-3deg) scale(.95);opacity:1}100%{transform:rotate(-3deg) scale(1);opacity:1}}
 .seal{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23t)'/%3E%3C/svg%3E") center/cover;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.05'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23t)'/%3E%3C/svg%3E") center/cover}
 /* a faint ink trail behind the pointer */
-#trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:19;mix-blend-mode:multiply}
+#trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:19}
 @media (hover:none){#trail{display:none}}
 .khoz .sub a{transition:color .3s,border-color .3s}.khoz .sub a:hover{color:var(--shu);border-color:var(--shu)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.stroke{stroke-dashoffset:0}.vert,.name{opacity:1}.line p span{opacity:1;filter:none}.khoz .col{--d:1}.close .seal{--ss:1;--so:1}.ink{height:auto}.ink-stage{position:relative}}
+
+/* Fuji in ink wash under the moon, a sakura branch, and petals on the wind */
+.fuji{position:absolute;left:0;right:0;bottom:-4vh;width:100%;height:48vh;height:48svh;object-fit:cover;object-position:50% 100%;max-width:none;opacity:0;animation:mist 2.6s ease-out 1.6s forwards}
+@keyframes mist{from{opacity:0}to{opacity:1}}
+.enso{z-index:1}
+.branch{position:absolute;left:0;top:calc(env(safe-area-inset-top,0px) + 74px);width:min(40vw,400px);z-index:2;overflow:visible}
+.branch .twig{fill:none;stroke:var(--sumi);stroke-linecap:round;stroke-dasharray:1 2;stroke-dashoffset:1;animation:draw 1.4s cubic-bezier(.5,0,.3,1) forwards;animation-delay:var(--t,0s)}
+.branch .bl{transform-box:fill-box;transform-origin:center;transform:scale(0) rotate(-40deg);animation:bloom .9s cubic-bezier(.3,1.5,.5,1) forwards;animation-delay:var(--t,3s)}
+@keyframes bloom{to{transform:scale(1) rotate(0)}}
+.name{z-index:3;text-shadow:0 0 18px var(--paper),0 0 6px var(--paper)}.name .meta{color:var(--sumi-2)}
+
+/* the moon fills on the compositor: a pre-rendered ink edge slides up inside a round window */
+.pool-win{position:absolute;left:15%;top:16%;width:70%;height:70%;border-radius:50%;overflow:hidden;transform:translateZ(0);contain:strict}
+.pool-ink{position:absolute;left:-10%;width:120%;top:0;height:200%;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 480 800%27 preserveAspectRatio=%27none%27%3E%3Cfilter id=%27b%27 x=%27-10%25%27 y=%27-10%25%27 width=%27120%25%27 height=%27120%25%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.03 .045%27 numOctaves=%273%27 seed=%2711%27/%3E%3CfeDisplacementMap in=%27SourceGraphic%27 scale=%2730%27 xChannelSelector=%27R%27 yChannelSelector=%27G%27/%3E%3C/filter%3E%3Cg filter=%27url%28%23b%29%27%3E%3Crect x=%27-40%27 y=%2770%27 width=%27560%27 height=%27800%27 fill=%27%23141312%27/%3E%3C/g%3E%3Cg filter=%27url%28%23b%29%27 opacity=%27.35%27%3E%3Crect x=%27-40%27 y=%2752%27 width=%27560%27 height=%2760%27 fill=%27%23141312%27/%3E%3C/g%3E%3C/svg%3E") 0 0/100% 100% no-repeat;transform:translate3d(0,90%,0);will-change:transform;backface-visibility:hidden}
+.fuji{will-change:transform}
+#petals{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:18}
+@media (max-width:640px){.branch{width:62vw;top:calc(env(safe-area-inset-top,0px) + 64px)}.fuji{height:40vh;height:40svh}}
+@media (prefers-reduced-motion:reduce){.fuji{opacity:1}.branch .twig{stroke-dashoffset:0}.branch .bl{transform:none}#petals{display:none}}
 </style>
 </head>
 <body>
@@ -126,11 +144,22 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
     </filter>
     <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="1" seed="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.25" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <linearGradient id="wash" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141312" stop-opacity=".5"/><stop offset=".42" stop-color="#141312" stop-opacity=".22"/><stop offset=".85" stop-color="#141312" stop-opacity="0"/></linearGradient>
+    <linearGradient id="wash2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141312" stop-opacity=".16"/><stop offset=".7" stop-color="#141312" stop-opacity="0"/></linearGradient>
+    <filter id="wet" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".012 .05" numOctaves="3" seed="21" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <g id="flower"><g fill="#ebbcc1" stroke="#d88f99" stroke-width=".5">
+      <path d="M0 0C-3.2-2.6-3.6-7-1.3-8.7L0-7.5L1.3-8.7C3.6-7 3.2-2.6 0 0Z"/>
+      <path transform="rotate(72)" d="M0 0C-3.2-2.6-3.6-7-1.3-8.7L0-7.5L1.3-8.7C3.6-7 3.2-2.6 0 0Z"/>
+      <path transform="rotate(144)" d="M0 0C-3.2-2.6-3.6-7-1.3-8.7L0-7.5L1.3-8.7C3.6-7 3.2-2.6 0 0Z"/>
+      <path transform="rotate(216)" d="M0 0C-3.2-2.6-3.6-7-1.3-8.7L0-7.5L1.3-8.7C3.6-7 3.2-2.6 0 0Z"/>
+      <path transform="rotate(288)" d="M0 0C-3.2-2.6-3.6-7-1.3-8.7L0-7.5L1.3-8.7C3.6-7 3.2-2.6 0 0Z"/></g>
+      <circle r="1.9" fill="#b8382a" opacity=".75"/></g>
     <clipPath id="inside"><circle cx="200" cy="204" r="140"/></clipPath>
   </defs>
 </svg>
 <div class="fibre" aria-hidden="true"></div>
 <canvas id="trail" aria-hidden="true"></canvas>
+<canvas id="petals" aria-hidden="true"></canvas>
 
 <header class="frame gut">
   <a class="mark" href="#top"><span class="seal-s" aria-hidden="true">黒月</span><span class="meta" style="color:var(--sumi)">Kurotsuki</span></a>
@@ -140,11 +169,29 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 <main id="top">
   <section class="ink" id="ink" aria-label="Kurotsuki">
     <div class="ink-stage">
+      <img class="fuji" alt="" aria-hidden="true" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-200 0 1600 400' preserveAspectRatio='xMidYMax slice'%3E%3Cdefs%3E%3ClinearGradient id='wash' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23141312' stop-opacity='.5'/%3E%3Cstop offset='.42' stop-color='%23141312' stop-opacity='.22'/%3E%3Cstop offset='.85' stop-color='%23141312' stop-opacity='0'/%3E%3C/linearGradient%3E %3ClinearGradient id='wash2' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23141312' stop-opacity='.16'/%3E%3Cstop offset='.7' stop-color='%23141312' stop-opacity='0'/%3E%3C/linearGradient%3E %3Cfilter id='wet' x='-5%25' y='-10%25' width='110%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .05' numOctaves='3' seed='21' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='14' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23wet)'%3E %3Cpath fill='url(%23wash2)' d='M -240 400 L -240 296 C 160 290 300 240 420 200 C 470 186 520 196 580 214 C 700 248 860 250 1440 290 L 1440 400 Z'/%3E %3Cpath fill='url(%23wash)' d='M -240 400 L -240 360 C 180 342 340 300 460 228 C 510 196 540 172 566 152 Q 600 138 636 152 C 662 172 692 196 742 228 C 862 300 1020 342 1440 360 L 1440 400 Z'/%3E %3Cpath fill='%23f1ede4' d='M 566 152 Q 600 138 636 152 C 648 162 660 171 672 180 L 660 186 L 650 176 L 640 196 L 628 180 L 614 204 L 602 182 L 588 200 L 578 180 L 566 194 L 556 176 L 540 184 C 548 172 556 162 566 152 Z' opacity='.92'/%3E %3C/g%3E%3C/svg%3E">
+      <svg class="branch" viewBox="0 0 400 230" aria-hidden="true">
+        <g filter="url(#brush)">
+          <path class="twig" pathLength="1" stroke-width="9" d="M -12 28 C 60 40 120 68 170 94 C 216 116 262 124 334 118" style="--t:2.3s"/>
+          <path class="twig" pathLength="1" stroke-width="4" d="M 116 62 C 140 40 170 24 206 18" style="--t:2.7s"/>
+          <path class="twig" pathLength="1" stroke-width="3.5" d="M 212 112 C 232 148 252 170 288 186" style="--t:2.8s"/>
+          <path class="twig" pathLength="1" stroke-width="3" d="M 282 122 C 302 106 322 96 354 92" style="--t:2.9s"/>
+        </g>
+          <g transform="translate(176 93)"><use class="bl" href="#flower" transform="scale(1.25)" style="--t:3.0s"/></g>
+          <g transform="translate(204 20)"><use class="bl" href="#flower" transform="scale(1.0)" style="--t:3.2s"/></g>
+          <g transform="translate(186 34)"><use class="bl" href="#flower" transform="scale(0.75)" style="--t:3.35s"/></g>
+          <g transform="translate(146 80)"><use class="bl" href="#flower" transform="scale(0.9)" style="--t:3.1s"/></g>
+          <g transform="translate(242 121)"><use class="bl" href="#flower" transform="scale(1.35)" style="--t:3.25s"/></g>
+          <g transform="translate(286 186)"><use class="bl" href="#flower" transform="scale(1.05)" style="--t:3.5s"/></g>
+          <g transform="translate(262 163)"><use class="bl" href="#flower" transform="scale(0.8)" style="--t:3.6s"/></g>
+          <g transform="translate(332 118)"><use class="bl" href="#flower" transform="scale(1.15)" style="--t:3.4s"/></g>
+          <g transform="translate(352 93)"><use class="bl" href="#flower" transform="scale(0.85)" style="--t:3.55s"/></g>
+          <g transform="translate(116 60)"><use class="bl" href="#flower" transform="scale(0.7)" style="--t:3.45s"/></g>
+          <circle class="bl" cx="224" cy="10" r="3.2" fill="#d88f99" style="--t:3.7s"/><circle class="bl" cx="304" cy="108" r="3.2" fill="#d88f99" style="--t:3.7s"/><circle class="bl" cx="300" cy="198" r="3.2" fill="#d88f99" style="--t:3.7s"/><circle class="bl" cx="366" cy="88" r="3.2" fill="#d88f99" style="--t:3.7s"/>
+      </svg>
       <div class="enso">
+        <div class="pool-win" aria-hidden="true"><div class="pool-ink" id="pool"></div></div>
         <svg viewBox="0 0 400 400" aria-hidden="true">
-          <g clip-path="url(#inside)" filter="url(#bleed)">
-            <rect class="pool" id="pool" x="20" y="400" width="360" height="420" fill="#141312"/>
-          </g>
           <g filter="url(#brush)">
             <path class="stroke main" pathLength="1" d="M 262 72 C 326 100 360 168 348 236 C 335 308 268 354 194 351 C 117 348 55 289 53 211 C 52 186 58 164 69 145"/>
             <path class="stroke press" pathLength="1" d="M 258 70 C 298 86 328 114 344 150"/>
@@ -197,17 +244,31 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-  const ink = document.getElementById('ink'), pool = document.getElementById('pool'), cap = document.getElementById('cap');
+  const ink = document.getElementById('ink'), pool = document.getElementById('pool'), cap = document.getElementById('cap'), fuji = document.querySelector('.fuji');
   /* ink pools up inside the circle until it's a black moon */
-  const onScroll = () => {
-    const r = ink.getBoundingClientRect();
-    const p = reduce ? 1 : clamp(-r.top / (r.height - innerHeight), 0, 1);
-    const e = 1 - Math.pow(1 - p, 2.2);
-    pool.setAttribute('y', (360 - e * 330).toFixed(1));
-    cap.style.setProperty('--cap', p > .85 ? 1 : 0);
-    document.getElementById('rim').style.setProperty('--rim', p > .9 ? .85 : 0);
+  /* scroll sets a target; each frame eases toward it, so wheel steps and flicks glide instead of jump */
+  const rim = document.getElementById('rim');
+  let target = 0, cur = 0, last = 0, raf = 0, capOn = null, rimOn = null;
+  const read = () => { const r = ink.getBoundingClientRect(); target = reduce ? 1 : clamp(-r.top / (r.height - innerHeight), 0, 1); };
+  const paint = (p) => {
+    const e = p * p * (3 - 2 * p);
+    const sway = Math.sin(e * Math.PI) * 2.2;
+    pool.style.transform = `translate3d(${sway.toFixed(3)}%,${(45 - e * 55).toFixed(3)}%,0)`;
+    fuji.style.transform = `translate3d(0,${(e * 24).toFixed(2)}px,0)`;
+    const c = p > .85, m = p > .9;
+    if (c !== capOn) { capOn = c; cap.style.setProperty('--cap', c ? 1 : 0); }
+    if (m !== rimOn) { rimOn = m; rim.style.setProperty('--rim', m ? .85 : 0); }
   };
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const frame = (now) => {
+    const dt = last ? Math.min(64, now - last) : 16; last = now;
+    cur += (target - cur) * (1 - Math.exp(-dt / 140));
+    if (Math.abs(target - cur) < .0004) cur = target;
+    paint(cur);
+    if (cur !== target) raf = requestAnimationFrame(frame); else { raf = 0; last = 0; }
+  };
+  const kick = () => { read(); if (!raf) raf = requestAnimationFrame(frame); };
+  addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick);
+  read(); cur = target; paint(cur);
 
   const lp = document.getElementById('lp');
   lp.innerHTML = lp.textContent.split(' ').map((w, i) => `<span style="--i:${i}">${w}</span>`).join(' ');
@@ -233,6 +294,34 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;paddin
       for (const d of dots) { tg.globalAlpha = d.a; tg.fillStyle = '#141312'; tg.beginPath(); tg.arc(d.x, d.y, d.r, 0, 6.29); tg.fill(); }
       if (dots.length) requestAnimationFrame(tick); else run = false;
     };
+  }
+
+
+  /* petals on the wind */
+  if (!reduce) {
+    const pc = document.getElementById('petals'), pg = pc.getContext('2d'); let W = 0, H = 0;
+    const fit = () => { const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; pc.width = W * d; pc.height = H * d; pg.setTransform(d, 0, 0, d, 0, 0); };
+    fit(); addEventListener('resize', fit);
+    const N = innerWidth < 640 ? 9 : 16;
+    const make = (first) => ({ x: Math.random() * W * 1.2, y: first ? Math.random() * H : -20 - Math.random() * 80, s: 4 + Math.random() * 4, vy: .35 + Math.random() * .45, vx: -.25 - Math.random() * .45, a: Math.random() * 6.28, va: (Math.random() - .5) * .04, ph: Math.random() * 6.28, f: .4 + Math.random() * .5 });
+    const ps = Array.from({ length: N }, () => make(true));
+    let last = 0;
+    const draw = (now) => {
+      const dt = Math.min(3, last ? (now - last) / 16.7 : 1); last = now;
+      pg.clearRect(0, 0, W, H);
+      for (let i = 0; i < ps.length; i++) {
+        const p = ps[i]; p.ph += .02 * dt; p.a += p.va * dt;
+        p.x += (p.vx + Math.sin(p.ph) * .5) * dt; p.y += p.vy * dt;
+        if (p.y > H + 20 || p.x < -30) { ps[i] = make(false); continue; }
+        const flip = Math.cos(p.ph * 1.7);
+        pg.save(); pg.translate(p.x, p.y); pg.rotate(p.a); pg.scale(1, .35 + .65 * Math.abs(flip));
+        pg.globalAlpha = .55 + .35 * p.f; pg.fillStyle = flip > 0 ? '#ebbcc1' : '#e3a9b1';
+        const s = p.s; pg.beginPath(); pg.moveTo(0, s); pg.bezierCurveTo(-s * .9, s * .4, -s * .8, -s * .7, -s * .22, -s); pg.lineTo(0, -s * .72); pg.lineTo(s * .22, -s); pg.bezierCurveTo(s * .8, -s * .7, s * .9, s * .4, 0, s); pg.fill();
+        pg.restore();
+      }
+      requestAnimationFrame(draw);
+    };
+    setTimeout(() => requestAnimationFrame(draw), 3200);
   }
 
   document.getElementById('copy').addEventListener('click', async (e) => {
