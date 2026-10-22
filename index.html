@@ -43,7 +43,7 @@ a{color:inherit}
 
 /* hero: the hills stretch with the screen; Fuji is sized and placed from the moon, its peak just over the
    moon's lower edge and the wordmark on its slopes below the snow, so the three keep their places at any size */
-.hero{--top:clamp(120px,14svh,170px);--moon:clamp(250px,48svh,460px);--range:300px;position:relative;height:max(clamp(760px,100svh,980px),calc(var(--top) + var(--moon) + 380px));display:flex;flex-direction:column;align-items:center;padding-top:var(--top);isolation:isolate;overflow:hidden}
+.hero{--top:clamp(120px,14svh,170px);--moon:clamp(230px,42svh,400px);--range:300px;position:relative;height:max(clamp(760px,100svh,980px),calc(var(--top) + var(--moon) + 380px));display:flex;flex-direction:column;align-items:center;padding-top:var(--top);isolation:isolate;overflow:hidden}
 .nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) var(--edge) 18px;z-index:30;animation:fadeDown 1.2s ease .2s both;transition:background .5s,backdrop-filter .5s}
 .nav.solid{background:rgba(11,11,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .brand{display:flex;gap:12px;align-items:center;min-height:44px;text-decoration:none;color:var(--paper);font-size:12px;font-weight:500;letter-spacing:.32em;text-transform:uppercase}
@@ -59,7 +59,7 @@ a{color:inherit}
 .star{position:absolute;border-radius:50%;background:var(--paper);opacity:.18;animation:twinkle var(--d) ease-in-out var(--delay) infinite alternate}
 .petals{position:absolute;inset:0;z-index:4;pointer-events:none}
 .petal{position:absolute;top:-4%;width:var(--s);height:calc(var(--s) * 1.3);background:var(--sakura);border-radius:80% 0 80% 0;opacity:0;animation:fall var(--d) linear var(--delay) infinite}
-.halo{position:absolute;top:var(--top);left:50%;width:calc(var(--moon) * 2.4);aspect-ratio:1;translate:-50% -29%;border-radius:50%;background:radial-gradient(circle closest-side,color-mix(in srgb,var(--seal) 30%,transparent) 0%,color-mix(in srgb,var(--seal) 23%,transparent) 22%,color-mix(in srgb,var(--seal) 15%,transparent) 38%,color-mix(in srgb,var(--seal) 8%,transparent) 52%,color-mix(in srgb,var(--seal) 4.5%,transparent) 65%,color-mix(in srgb,var(--seal) 2%,transparent) 77%,color-mix(in srgb,var(--seal) .6%,transparent) 89%,transparent 100%);filter:blur(28px);z-index:-2;animation:breathe 7s ease-in-out infinite alternate}
+.halo{position:absolute;top:var(--top);left:50%;width:calc(var(--moon) * 1.8);aspect-ratio:1;translate:-50% -22.2%;border-radius:50%;background:radial-gradient(circle closest-side,color-mix(in srgb,var(--seal) 30%,transparent) 0%,color-mix(in srgb,var(--seal) 23%,transparent) 22%,color-mix(in srgb,var(--seal) 15%,transparent) 38%,color-mix(in srgb,var(--seal) 8%,transparent) 52%,color-mix(in srgb,var(--seal) 4.5%,transparent) 65%,color-mix(in srgb,var(--seal) 2%,transparent) 77%,color-mix(in srgb,var(--seal) .6%,transparent) 89%,transparent 100%);filter:blur(22px);z-index:-2;animation:breathe 7s ease-in-out infinite alternate}
 /* fine grain over the sky so the dark glow fades without visible steps */
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
@@ -68,7 +68,7 @@ a{color:inherit}
 .moon{overflow:visible}
 .moon-clip{position:absolute;inset:0;border-radius:50%;overflow:hidden}
 /* total eclipse: the disc covers the moon, a faint rim and a soft corona stay, and one soft flash marks totality */
-.corona{position:absolute;inset:-24%;border-radius:50%;background:radial-gradient(circle closest-side,transparent 69%,rgba(241,237,228,.16) 71.5%,rgba(241,237,228,.05) 78%,color-mix(in srgb,var(--sakura) 4%,transparent) 88%,transparent 100%);filter:blur(3px);animation:fade 3s ease 5.2s both}
+.corona{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle closest-side,transparent 79%,rgba(241,237,228,.16) 81.5%,rgba(241,237,228,.05) 87%,color-mix(in srgb,var(--sakura) 4%,transparent) 93%,transparent 100%);filter:blur(3px);animation:fade 3s ease 5.2s both}
 .bead{position:absolute;left:86%;top:15%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#fff;box-shadow:0 0 8px 3px #fff,0 0 30px 10px color-mix(in srgb,var(--paper) 45%,transparent);animation:flash 2.4s ease-out 4.9s both}
 .bead::before,.bead::after{content:"";position:absolute;left:50%;top:50%;width:150px;height:1.5px;margin:-.75px 0 0 -75px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:rotate(-28deg);opacity:.6}
 .bead::after{width:80px;margin-left:-40px;transform:rotate(62deg);opacity:.4}
@@ -78,7 +78,7 @@ a{color:inherit}
 .shade{position:absolute;inset:-1%;border-radius:50%;background:radial-gradient(circle at 40% 50%,#1a191f 0%,#0b0b0d 72%);animation:eclipse 4.6s cubic-bezier(.66,0,.16,1) .7s both}
 .range{position:absolute;left:0;right:0;bottom:0;height:var(--range);z-index:1;pointer-events:none}
 .hills{position:absolute;inset:0;width:100%;height:100%}
-.fuji{position:absolute;left:50%;top:calc(var(--top) + var(--moon) * .86);width:calc(var(--moon) * 3.6);height:auto;aspect-ratio:10/4;translate:-50% 0;z-index:1;pointer-events:none}
+.fuji{position:absolute;left:50%;top:calc(var(--top) + var(--moon) * .86);width:calc(var(--moon) * 3.6);height:auto;aspect-ratio:2/1;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);translate:-50% 0;z-index:1;pointer-events:none}
 .ridge-far{fill:#18171c}
 .ridge-mid{fill:#121116}
 .ridge-near{fill:var(--ink)}
@@ -249,7 +249,7 @@ footer a:hover{color:var(--paper)}
 }
 @media (max-width:760px){
   .navlinks .hide-s{display:none}
-  .hero{--top:150px;--moon:286px;--range:240px;height:max(clamp(740px,100svh,880px),calc(var(--top) + var(--moon) + 340px))}
+  .hero{--top:150px;--moon:250px;--range:240px;height:max(clamp(740px,100svh,880px),calc(var(--top) + var(--moon) + 340px))}
   .vert{top:104px;translate:none;right:20px;gap:14px}
   .vert .k{font-size:30px}
   .vert .r,.vleft{display:none}
@@ -335,7 +335,7 @@ footer a:hover{color:var(--paper)}
         <path class="ridge-far" d="M0 236 C 300 214 520 196 720 186 C 920 196 1140 214 1440 236 L1440 320 L0 320 Z"/>
       </svg>
     </div>
-    <svg class="fuji" viewBox="0 0 1000 400" aria-hidden="true">
+    <svg class="fuji" viewBox="0 0 1000 500" aria-hidden="true">
       <defs>
         <linearGradient id="fujiFill" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#2b2a31"/>
@@ -343,7 +343,7 @@ footer a:hover{color:var(--paper)}
           <stop offset="1" stop-color="#121116"/>
         </linearGradient>
       </defs>
-      <path fill="url(#fujiFill)" d="M0 230 C 200 214 330 170 420 90 C 452 60 476 30 500 20 C 524 30 548 60 580 90 C 670 170 800 214 1000 230 L1000 400 L0 400 Z"/>
+      <path fill="url(#fujiFill)" d="M0 230 C 200 214 330 170 420 90 C 452 60 476 30 500 20 C 524 30 548 60 580 90 C 670 170 800 214 1000 230 L1000 500 L0 500 Z"/>
       <path class="snow" d="M455 58 C 470 44 486 28 500 20 C 514 28 530 44 545 58 L 534 66 L 524 58 L 515 74 L 505 61 L 496 72 L 487 60 L 476 68 L 466 60 Z"/>
     </svg>
     <div class="range" aria-hidden="true">
