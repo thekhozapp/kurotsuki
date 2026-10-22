@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://kurotsuki.in/">
 <meta name="description" content="Kurotsuki Private Limited. Makers of KHOZ.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23c8402f'/%3E%3Cpath d='M41 15a20 20 0 1 1-16-1' fill='none' stroke='%23f1ede4' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%228%22 fill=%22%23c8402f%22/%3E%3Cg fill=%22%23f1ede4%22%3E%3Cpath transform=%22translate(19.250 28.086) scale(0.02550 -0.02550)%22 d=%22M733 808Q737 813 744.0 821.5Q751 830 755.5 834.0Q760 838 764 838Q770 838 797.0 819.0Q824 800 847.5 779.0Q871 758 871 751Q858 736 833 731V435Q832 431 810.0 422.0Q788 413 764 410L780 396Q826 358 865 322Q861 306 840 306H554V196H768L798 239Q804 247 812.5 259.0Q821 271 826.0 276.5Q831 282 835 282Q841 282 869.0 260.0Q897 238 922.0 214.0Q947 190 947 183Q943 167 920 167H229Q158 166 79 153L53 204Q108 198 186 196H440V306H320Q249 305 170 292L144 343Q199 337 277 335H440V440H278V417Q278 411 263.5 402.0Q249 393 226.5 386.5Q204 380 182 380Q170 380 164.0 386.0Q158 392 158 400Q163 454 165 545V628Q165 754 152 833L286 778H709ZM440 624V750H278V624ZM719 624V750H554V624ZM278 595V469H440V595ZM554 469H719V595H554ZM756 408 738 407H719V440H554V335H702ZM215 146Q228 101 228 61Q228 7 206.5 -31.5Q185 -70 153 -85Q136 -94 117 -94Q94 -94 77.0 -79.5Q60 -65 60 -40Q60 -20 72.0 -4.5Q84 11 104 21Q139 35 169.0 69.5Q199 104 202 146ZM336 141Q398 106 426.5 65.0Q455 24 455 -14Q455 -44 439.0 -64.0Q423 -84 400 -84Q374 -84 351 -58Q352 -49 352 -30Q352 52 325 137ZM701 140Q784 129 838.0 102.0Q892 75 916.0 41.0Q940 7 940 -26Q940 -53 925.0 -71.0Q910 -89 886 -89Q869 -89 848 -77Q831 -22 787.0 36.0Q743 94 693 132ZM509 139Q599 113 641.0 70.0Q683 27 683 -17Q683 -45 667.5 -63.0Q652 -81 629 -81Q608 -81 585 -63Q578 -16 553.5 37.5Q529 91 499 133Z%22/%3E%3Cpath transform=%22translate(20.716 54.959) scale(0.02550 -0.02550)%22 d=%22M347 279Q329 161 265.5 67.5Q202 -26 71 -90L62 -82Q137 -13 177.0 70.0Q217 153 230.5 242.5Q244 332 244 446V627Q244 738 232 813L376 760H657L681 792Q684 796 691.5 805.5Q699 815 704.0 819.5Q709 824 713 824Q719 824 746.5 804.0Q774 784 798.5 762.0Q823 740 823 733Q812 718 784 712V54Q784 8 773.0 -20.0Q762 -48 727.5 -65.5Q693 -83 626 -90Q623 -57 617.0 -36.5Q611 -16 599 -3Q585 12 562.5 22.0Q540 32 500 40V53Q621 45 644 45Q657 45 662.0 50.5Q667 56 667 68V279ZM667 537V731H358V537ZM358 447Q358 362 351 307H667V509H358Z%22/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
@@ -45,9 +45,8 @@ a{color:inherit}
 .nav{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) var(--gut) 18px;z-index:30;animation:fadeDown 1.2s ease .2s both;transition:background .5s,backdrop-filter .5s}
 .nav.solid{background:rgba(11,11,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .brand{display:flex;gap:12px;align-items:center;min-height:44px;text-decoration:none;color:var(--paper);font-size:12px;font-weight:500;letter-spacing:.32em;text-transform:uppercase}
-.seal{width:34px;height:34px;border-radius:7px;background:var(--seal);display:grid;place-items:center;flex:none}
-.seal svg{width:20px;height:20px}
-.seal path{fill:none;stroke:var(--paper);stroke-width:3.2;stroke-linecap:round}
+/* the hanko: 黒月 cut from Shippori Mincho as outlines, so the tab icon matches without a web font */
+.seal{width:36px;height:36px;flex:none}
 .navlinks{display:flex;align-items:center;gap:4px}
 .navlinks a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--mute);transition:color .4s}
 .navlinks a:hover{color:var(--paper)}
@@ -299,9 +298,10 @@ footer a:hover{color:var(--paper)}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="var(--seal)"/><g fill="var(--paper)"><path transform="translate(19.250 28.086) scale(0.02550 -0.02550)" d="M733 808Q737 813 744.0 821.5Q751 830 755.5 834.0Q760 838 764 838Q770 838 797.0 819.0Q824 800 847.5 779.0Q871 758 871 751Q858 736 833 731V435Q832 431 810.0 422.0Q788 413 764 410L780 396Q826 358 865 322Q861 306 840 306H554V196H768L798 239Q804 247 812.5 259.0Q821 271 826.0 276.5Q831 282 835 282Q841 282 869.0 260.0Q897 238 922.0 214.0Q947 190 947 183Q943 167 920 167H229Q158 166 79 153L53 204Q108 198 186 196H440V306H320Q249 305 170 292L144 343Q199 337 277 335H440V440H278V417Q278 411 263.5 402.0Q249 393 226.5 386.5Q204 380 182 380Q170 380 164.0 386.0Q158 392 158 400Q163 454 165 545V628Q165 754 152 833L286 778H709ZM440 624V750H278V624ZM719 624V750H554V624ZM278 595V469H440V595ZM554 469H719V595H554ZM756 408 738 407H719V440H554V335H702ZM215 146Q228 101 228 61Q228 7 206.5 -31.5Q185 -70 153 -85Q136 -94 117 -94Q94 -94 77.0 -79.5Q60 -65 60 -40Q60 -20 72.0 -4.5Q84 11 104 21Q139 35 169.0 69.5Q199 104 202 146ZM336 141Q398 106 426.5 65.0Q455 24 455 -14Q455 -44 439.0 -64.0Q423 -84 400 -84Q374 -84 351 -58Q352 -49 352 -30Q352 52 325 137ZM701 140Q784 129 838.0 102.0Q892 75 916.0 41.0Q940 7 940 -26Q940 -53 925.0 -71.0Q910 -89 886 -89Q869 -89 848 -77Q831 -22 787.0 36.0Q743 94 693 132ZM509 139Q599 113 641.0 70.0Q683 27 683 -17Q683 -45 667.5 -63.0Q652 -81 629 -81Q608 -81 585 -63Q578 -16 553.5 37.5Q529 91 499 133Z"/><path transform="translate(20.716 54.959) scale(0.02550 -0.02550)" d="M347 279Q329 161 265.5 67.5Q202 -26 71 -90L62 -82Q137 -13 177.0 70.0Q217 153 230.5 242.5Q244 332 244 446V627Q244 738 232 813L376 760H657L681 792Q684 796 691.5 805.5Q699 815 704.0 819.5Q709 824 713 824Q719 824 746.5 804.0Q774 784 798.5 762.0Q823 740 823 733Q812 718 784 712V54Q784 8 773.0 -20.0Q762 -48 727.5 -65.5Q693 -83 626 -90Q623 -57 617.0 -36.5Q611 -16 599 -3Q585 12 562.5 22.0Q540 32 500 40V53Q621 45 644 45Q657 45 662.0 50.5Q667 56 667 68V279ZM667 537V731H358V537ZM358 447Q358 362 351 307H667V509H358Z"/></g></symbol></svg>
 <nav class="nav" aria-label="Main">
   <a class="brand" href="#top">
-    <span class="seal"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M41 15a20 20 0 1 1-16-1"/></svg></span>
+    <svg class="seal" viewBox="0 0 64 64" aria-hidden="true"><use href="#seal"/></svg>
     Kurotsuki
   </a>
   <div class="navlinks">
@@ -491,7 +491,7 @@ footer a:hover{color:var(--paper)}
 </main>
 <footer>
   <a class="brand" href="#top">
-    <span class="seal"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M41 15a20 20 0 1 1-16-1"/></svg></span>
+    <svg class="seal" viewBox="0 0 64 64" aria-hidden="true"><use href="#seal"/></svg>
     Kurotsuki Private Limited
   </a>
   <a href="https://khoz.app" target="_blank" rel="noopener">khoz.app</a>
