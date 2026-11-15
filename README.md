@@ -3,6 +3,7 @@
 The one-page site for **Kurotsuki Private Limited** (黒月, "black moon"), makers of [KHOZ](https://khoz.app).
 
 - `index.html` is the whole site: plain HTML, CSS and JS, with fonts from Google Fonts and no build step.
+- `favicon.ico`, `apple-touch-icon.png` and `og-image.png` are the tab icon for older browsers, the home-screen icon and the link preview. The mark in the page and the theme-following tab icon are drawn inline in `index.html`.
 - Every push to `main` publishes it to GitHub Pages (`.github/workflows/pages.yml`).
 - `CNAME` points Pages at `kurotsuki.in`.
 
